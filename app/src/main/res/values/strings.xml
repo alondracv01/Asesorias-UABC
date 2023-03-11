@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Asesorias UABC</string>
+    <string name="nombre">Asesorías UABC</string>
+    <string name="nav_materias">Mis materias</string>
+    <string name="nav_citas">Mis citas</string>
+    <string name="nav_solicitar">Solicitar asesoría</string>
+    <string name="nav_asesores">Asesores</string>
+</resources>

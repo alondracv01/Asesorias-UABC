@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_materias"
+            android:checked="true"
+            android:icon="@drawable/materias"
+            android:title="@string/nav_materias" />
+
+        <item
+            android:id="@+id/nav_citas"
+            android:icon="@drawable/citas"
+            android:title="@string/nav_citas" />
+
+        <item
+            android:id="@+id/nav_asesores"
+            android:icon="@drawable/asesores"
+            android:title="@string/nav_asesores" />
+
+        <item
+            android:id="@+id/nav_solicitar"
+            android:icon="@drawable/solicitar"
+            android:title="@string/nav_solicitar" />
+    </group>
+
+</menu>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/colorSecondaryLight"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".LogInActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryLight"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="86dp"
+            android:fontFamily="@font/proximanova_semibold"
+            android:text="Asesorias UABC"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/portada"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cimarron" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:textColorHint="@color/white"
+            android:hint="Usuario" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:textColorHint="@color/white"
+            android:hint="Contrasena" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="#FEBE10"
+            android:text="Ingresar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/klavika_light"
+            android:text="¡Bienvenido Cimarron!"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+    </LinearLayout>
+
+</LinearLayout>
