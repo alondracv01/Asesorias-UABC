@@ -2,6 +2,7 @@ package com.hfad.asesoriasuabc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,11 +19,21 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private int actualFrag = R.id.nav_materias;
 
+    public String matricula;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Fragment fragment = null;
+
+        if (savedInstanceState == null) {
+            matricula= getIntent().getStringExtra("matricula");
+            Log.d("MainActivity", "Matricula que envio LogIn: " + matricula);
+        } else {
+            matricula= (String) savedInstanceState.getSerializable("matricula");
+            Log.d("MainActivity", "Matricula que envio LogIn: " + matricula);
+        }
 
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
@@ -162,5 +173,6 @@ public class MainActivity extends AppCompatActivity
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt("fragmento", actualFrag);
+        savedInstanceState.putString("matricula", matricula);
     }
 }

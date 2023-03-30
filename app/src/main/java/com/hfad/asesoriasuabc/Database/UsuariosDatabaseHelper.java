@@ -28,18 +28,14 @@ public class UsuariosDatabaseHelper extends SQLiteOpenHelper {
                                     String apellido,
                                     String correo,
                                     String matricula,
-                                    String contrasena,
-                                    boolean asesor,
-                                    boolean registrado){
+                                    String contrasena){
         ContentValues userValues = new ContentValues();
         userValues.put("NOMBRE", nombre);
         userValues.put("APELLIDO", apellido);
         userValues.put("CORREO", correo);
         userValues.put("MATRICULA", matricula);
         userValues.put("CONTRASENA", contrasena);
-        userValues.put("ASESOR", asesor);
-        userValues.put("REGISTRADO", registrado);
-        db.insert("Usuarios", null, userValues);
+        db.insert("USUARIOS", null, userValues);
     }
 
     private void updateMyDataBase(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -50,11 +46,8 @@ public class UsuariosDatabaseHelper extends SQLiteOpenHelper {
                     + "APELLIDO TEXT,"
                     + "CORREO TEXT,"
                     + "MATRICULA TEXT,"
-                    + "CONTRASENA TEXT,"
-                    + "ASESOR BOOLEAN,"
-                    + "REGISTRADO BOOLEAN);");
-            insertDatos(db, "","","","", "",false, false);
-            insertDatos(db, "Tamara", "Rico", "tamara.rico@uabc.edu.mx", "1270673", "1234", true, true);
+                    + "CONTRASENA TEXT);");
+            insertDatos(db, "Alondra", "Carrasco", "alondra.carrasco@uabc.edu.mx", "1270851", "1234567890");
         }
     }
 }

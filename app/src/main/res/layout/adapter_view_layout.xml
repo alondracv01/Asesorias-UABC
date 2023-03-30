@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="40">
+
+        <TextView
+            android:id="@+id/asesorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:text="Asesor" />
+
+        <TextView
+            android:id="@+id/correoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans"
+            android:text="correo" />
+
+        <TextView
+            android:id="@+id/materiasTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans"
+            android:text="materias" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="60">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:text="Lunes" />
+
+        <TextView
+            android:id="@+id/lunesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans"
+            android:text="1-2 pm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:text="Martes" />
+
+        <TextView
+            android:id="@+id/martesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans"
+            android:text="1-2 pm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:text="Miercoles" />
+
+        <TextView
+            android:id="@+id/miercolesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans"
+            android:text="1-2 pm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:text="Jueves" />
+
+        <TextView
+            android:id="@+id/juevesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans"
+            android:text="1-2 pm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:text="Viernes" />
+
+        <TextView
+            android:id="@+id/viernesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:fontFamily="@font/gillsans"
+            android:text="1-2 pm" />
+    </LinearLayout>
+</LinearLayout>
