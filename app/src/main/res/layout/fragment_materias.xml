@@ -63,7 +63,7 @@
                 android:textSize="15dp"
                 android:fontFamily="@font/klavika_medium"
                 android:layout_margin="10dp"
-                android:text="Materias" />
+                android:text="Materias cursando" />
 
             <ListView
                 android:id="@+id/materiasListView"

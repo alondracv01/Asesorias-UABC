@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MateriasFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:fontFamily="@font/gillsans_bold"
+                android:text="Solicitar asesoria" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/solicitarMateriasText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/klavika_medium"
+                        android:layout_margin="10dp"
+                        android:text="Materias cursando" />
+
+                    <RadioGroup
+                        android:id="@+id/groupMaterias"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/solicitarAsesorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/klavika_medium"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Asesores disponibles" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/noDisponiblesText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            android:textSize="15dp"
+                            android:fontFamily="@font/klavika_light"
+                            android:layout_margin="10dp"
+                            android:text="No hay asesores disponibles para la materia seleccionada." />
+
+                        <RadioGroup
+                            android:id="@+id/groupAsesores"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/solicitarHorarioText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/klavika_medium"
+                        android:layout_margin="10dp"
+                        android:text="Horario del asesor" />
+
+                    <RadioGroup
+                        android:id="@+id/groupHorario"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
