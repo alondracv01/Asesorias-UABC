@@ -9,13 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import androidx.fragment.app.Fragment;
 
@@ -25,6 +31,7 @@ import com.hfad.asesoriasuabc.Database.UsuariosDatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SolicitarFragment extends Fragment{
     private SQLiteDatabase db;
@@ -43,8 +50,15 @@ public class SolicitarFragment extends Fragment{
     private RadioGroup mHorarioGroup;
 
     private RadioButton button;
+    private CalendarView mCalendar;
+    private Spinner mHorariosAsesor;
     SQLiteOpenHelper materiasDatabaseHelper;
     SQLiteOpenHelper asesoresDatabaseHelper;
+
+//    Date currentTime = Calendar.getInstance().getTime();
+//    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+//    String currentDateandTime = sdf.format(new Date());
+    long currentDate = new Date().getTime();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +75,28 @@ public class SolicitarFragment extends Fragment{
         matricula = main.matricula;
     }
 
+    public List<String> getHorarios(String dia, String matriculaAsesor){
+        List<String> labels = new ArrayList<String>();
+
+        asesoresDatabaseHelper = new AsesoresDatabaseHelper(getContext());
+        try{
+            db = asesoresDatabaseHelper.getReadableDatabase();
+            Cursor fila = db.rawQuery("select "+ dia +" from ASESORES where MATRICULA = '" + matriculaAsesor ,null);
+            while(fila.moveToNext()) {
+                labels.add(fila.getString(0));
+            }
+            fila.close();
+            db.close();
+        } catch (SQLiteException e){
+            Toast toast = Toast.makeText(getContext(), "Database unavaible: onStart", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+
+        // returning lables
+        return labels;
+    }
+
     @Override
     public void onStart(){
         super.onStart();
@@ -74,11 +110,16 @@ public class SolicitarFragment extends Fragment{
         mHorario = (TextView) view.findViewById(R.id.solicitarHorarioText);
         noDisponibles = (TextView) view.findViewById(R.id.noDisponiblesText);
 
+        mCalendar = (CalendarView) view.findViewById(R.id.calendario);
+        mHorariosAsesor = (Spinner) view.findViewById(R.id.horarios);
+
         mAsesor.setVisibility(View.INVISIBLE);
         mAsesoresGroup.setVisibility(View.INVISIBLE);
         mHorario.setVisibility(View.INVISIBLE);
         mHorarioGroup.setVisibility(View.INVISIBLE);
         noDisponibles.setVisibility(View.INVISIBLE);
+
+        mCalendar.setMinDate(currentDate);
 
         materiasDatabaseHelper = new MateriasDatabaseHelper(getContext());
         try{

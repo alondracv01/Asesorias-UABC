@@ -100,7 +100,30 @@
                     <RadioGroup
                         android:id="@+id/groupHorario"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/horarios"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:prompt="Hora"
+                                />
+
+                            <CalendarView
+                                android:id="@+id/calendario"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:minDate="04/20/2023"
+                                android:maxDate="12/31/2023"/>
+                        </LinearLayout>
+                    </RadioGroup>
+
 
                 </LinearLayout>
             </ScrollView>
