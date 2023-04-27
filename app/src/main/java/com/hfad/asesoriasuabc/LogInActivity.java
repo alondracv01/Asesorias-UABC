@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
@@ -20,8 +21,8 @@ public class LogInActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     String matricula = "";
     String contrasena = "";
-
     Button ingresar;
+    TextView registrar; //nuevo
     EditText matriculaEdit;
     EditText contrasenaEdit;
 
@@ -32,6 +33,7 @@ public class LogInActivity extends AppCompatActivity {
         matriculaEdit = (EditText) findViewById(R.id.usuario_editText);
         contrasenaEdit = (EditText) findViewById(R.id.contrasena_editText);
         ingresar = (Button) findViewById(R.id.ingresar_button);
+        registrar = (TextView) findViewById(R.id.registrar);//nuevo
     }
 
     @Override
@@ -79,5 +81,12 @@ public class LogInActivity extends AppCompatActivity {
                 Log.d("LoginActivity", "Button pressed");
             }
         });
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itemintent = new Intent(LogInActivity.this, Registros.class);
+                LogInActivity.this.startActivity(itemintent);}
+        });
     }
+
 }
