@@ -51,8 +51,8 @@ public class MateriasFragment extends Fragment{
 
     private TextView pNombre;
     private ListView pMaterias;
-    private ImageView fotoPerfil;
-    private ImageButton editar1;
+    //private ImageView fotoPerfil;
+    //private ImageButton editar1;
 
     private int numImagen = 0;
 
@@ -117,14 +117,14 @@ public class MateriasFragment extends Fragment{
         pNombre = (TextView) view.findViewById(R.id.nombre);
         pMaterias = (ListView) view.findViewById(R.id.materiasListView);
 
-        fotoPerfil = (ImageView) view.findViewById(R.id.fotoPerfil);
-        editar1 = (ImageButton) view.findViewById(R.id.editar_button1);
+        /*fotoPerfil = (ImageView) view.findViewById(R.id.fotoPerfil);
+        editar1 = (ImageButton) view.findViewById(R.id.editar_button1);*/
 
         pNombre.setText(nombre + " " + apellido);
         mAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, mLista);
         pMaterias.setAdapter(mAdapter);
 
-        SQLiteOpenHelper fotosDatabaseHelper = new FotosDatabaseHelper(getContext());
+        /*SQLiteOpenHelper fotosDatabaseHelper = new FotosDatabaseHelper(getContext());
         try{
             db = fotosDatabaseHelper.getReadableDatabase();
             Cursor cursor = db.query("IMAGENES",
@@ -165,15 +165,15 @@ public class MateriasFragment extends Fragment{
                 numImagen = 1;
                 cargarImagen();
             }
-        });
+        });*/
     }
 
-    private void cargarImagen() {
+   /* private void cargarImagen() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
         startActivityForResult(Intent.createChooser(intent, "Seleccione la aplicacion"), 10);
-    }
-
+    }*/
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -237,5 +237,5 @@ public class MateriasFragment extends Fragment{
             Toast toast = Toast.makeText(getContext(), "Database unavaible: guardar imagen", Toast.LENGTH_SHORT);
             toast.show();
         }
-    }
+    }*/
 }

@@ -62,7 +62,7 @@ public class AsesoresDatabaseHelper extends SQLiteOpenHelper {
                     + "MIERCOLES TEXT,"
                     + "JUEVES TEXT,"
                     + "VIERNES TEXT);");
-            insertDatos(db, "Tamara", "Rico", "tamara.rico@uabc.edu.mx", "1270673", "1234", "14:00 - 18:00", "13:00 - 17:00", "13:00 - 17:00", "13:00 - 17:00", "13:00 - 17:00");
+            insertDatos(db, "Tamara", "Rico", "tamara.rico@uabc.edu.mx", "1270673", "1234", "14:00-18:00", "13:00-17:00", "13:00-17:00", "13:00-17:00", "13:00-17:00");
         }
     }
 }
