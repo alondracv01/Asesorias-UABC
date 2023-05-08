@@ -50,6 +50,7 @@ public class MateriasFragment extends Fragment{
     private ArrayAdapter<String> mAdapter;
 
     private TextView pNombre;
+    private TextView pHorariosDisponibles;
     private ListView pMaterias;
     //private ImageView fotoPerfil;
     //private ImageButton editar1;
