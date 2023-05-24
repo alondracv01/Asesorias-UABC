@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryUltraLight">#EEFFEC</color>
     <color name="colorPrimaryLight">#50B848</color>
     <color name="colorPrimary">#00723F</color>
     <color name="colorPrimaryDark">#024731</color>

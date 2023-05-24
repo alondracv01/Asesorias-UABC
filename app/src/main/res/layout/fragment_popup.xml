@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="15dp"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/asesoriaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/gillsans_bold"
+        android:textColor="@color/colorPrimaryLight"
+        android:text="Asesoria" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryUltraLight">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/gillsans_bold"
+                    android:layout_margin="5dp"
+                    android:text="Materia: " />
+
+                <TextView
+                    android:id="@+id/materiaPopup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:textSize="10dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/gillsans"
+                    android:text="Nombre de la materia" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryUltraLight">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/gillsans_bold"
+                    android:layout_margin="5dp"
+                    android:text="Asesor: " />
+
+                <TextView
+                    android:id="@+id/asesorPopup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:textSize="10dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/gillsans"
+                    android:text="Nombre del asesor" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryUltraLight">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/gillsans_bold"
+                    android:layout_margin="5dp"
+                    android:text="Fecha: "/>
+
+                <TextView
+                    android:id="@+id/fechaPopup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:textSize="10dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/gillsans"
+                    android:text="Fecha de la cita" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryUltraLight">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/gillsans_bold"
+                    android:layout_margin="5dp"
+                    android:text="Hora: "/>
+
+                <TextView
+                    android:id="@+id/horaPopup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:textSize="10dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/gillsans"
+                    android:text="Hora de la cita" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryUltraLight">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/gillsans_bold"
+                    android:layout_margin="5dp"
+                    android:text="Estado: "/>
+
+                <TextView
+                    android:id="@+id/estadoPopup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:textSize="10dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/gillsans"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Estado de la cita" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:clickable="true">
+
+        <Button
+            android:id="@+id/cerrar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:background="@color/white"
+            android:text="Cerrar"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <LinearLayout
+                android:id="@+id/cancelarCita"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/colorPrimaryLight"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    app:srcCompat="@drawable/cancelar" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gillsans_bold"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:text="Cancelar cita"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/evaluar"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:background="@color/colorPrimaryLight"
+                android:text="Evaluar asesoria"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

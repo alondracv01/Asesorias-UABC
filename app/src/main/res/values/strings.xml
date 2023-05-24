@@ -7,4 +7,5 @@
     <string name="nav_asesores">Asesores</string>
     <string name="nav_open_drawer">Open navigation drawer</string>
     <string name="nav_close_drawer">Close navigation drawer</string>
+    <string name="notificacion"><center><b>¡La cita se creo con exito!</b>\n\nEspera por la respuesta del asesor.</center></string>
 </resources>

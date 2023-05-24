@@ -5,13 +5,17 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.hfad.asesoriasuabc.MateriasFragment;
+
 /*
  * ESTADOS CITAS:
- *       BORRADA
- *       ENVIADA
- *       CONFIRMADA
- *       FINALIZADA
- *       RECHAZADA
+ *       EN ESPERA          (Nadie califica)                            (Los dos pueden cancelar)
+ *       CONFIRMADA         (Nadie califica)                            (Los dos pueden cancelar)
+ *       FINALIZADA         (Los dos califican)                         (Nadie puede cancelar)
+ *       RECHAZADA          (Nadie califica)                            (Nadie puede cancelar)
+ *       CANCELADA          (Nadie califica)                            (Nadie puede cancelar)
+ *       ASESOR N/A         (Asesorado puede calificar, Asesor NO)      (Nadie puede cancelar)
+ *       ASESORADO N/A      (Asesor puede calificar, Asesorado NO)      (Nadie puede cancelar)
  * */
 public class CitasDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_TITLE = "CITAS";
@@ -32,12 +36,9 @@ public class CitasDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertDatos(SQLiteDatabase db,
-                                    String nombreAsesor,
-                                    String apellidoAsesor,
-                                    String nombreAsesorado,
-                                    String apellidoAsesorado,
                                     String matriculaAsesor,
                                     String matriculaAsesorado,
+                                    String materia,
                                     int dia,
                                     int mes,
                                     int year,
@@ -45,12 +46,9 @@ public class CitasDatabaseHelper extends SQLiteOpenHelper {
                                     String horaFin,
                                     String estado){
         ContentValues citasValues = new ContentValues();
-        citasValues.put("NOMBRE_ASESOR", nombreAsesor);
-        citasValues.put("APELLIDO_ASESOR", apellidoAsesor);
-        citasValues.put("NOMBRE_ASESORADO", nombreAsesorado);
-        citasValues.put("APELLIDO_ASESORADO", apellidoAsesorado);
         citasValues.put("MATRICULA_ASESOR", matriculaAsesor);
         citasValues.put("MATRICULA_ASESORADO", matriculaAsesorado);
+        citasValues.put("MATERIA", materia);
         citasValues.put("DAY", dia);
         citasValues.put("MONTH", mes);
         citasValues.put("YEAR", year);
@@ -62,21 +60,17 @@ public class CitasDatabaseHelper extends SQLiteOpenHelper {
 
     private void updateMyDataBase(SQLiteDatabase db, int oldVersion, int newVersion){
         if (oldVersion < 1){
-            db.execSQL("CREATE TABLE CITA ("
+            db.execSQL("CREATE TABLE CITAS ("
                     + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + "NOMBRE_ASESOR TEXT, "
-                    + "APELLIDO_ASESOR TEXT,"
-                    + "NOMBRE_ASESORADO TEXT,"
-                    + "APELLIDO_ASESORADO TEXT,"
                     + "MATRICULA_ASESOR TEXT,"
                     + "MATRICULA_ASESORADO TEXT,"
+                    + "MATERIA TEXT,"
                     + "DAY INTEGER,"
                     + "MONTH INTEGER,"
                     + "YEAR INTEGER,"
                     + "HORA_INICIO TEXT,"
                     + "HORA_FIN TEXT,"
                     + "ESTADO TEXT);");
-            //insertDatos(db, "Tamara", "Rico", "tamara.rico@uabc.edu.mx", "1270673", "1234", "14:00-18:00", "13:00-17:00", "13:00-17:00", "13:00-17:00", "13:00-17:00");
         }
     }
 }

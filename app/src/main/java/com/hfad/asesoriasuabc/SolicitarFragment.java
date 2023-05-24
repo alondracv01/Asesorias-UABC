@@ -1,5 +1,6 @@
 package com.hfad.asesoriasuabc;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -27,9 +28,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.hfad.asesoriasuabc.Database.AsesoresDatabaseHelper;
+import com.hfad.asesoriasuabc.Database.CitasDatabaseHelper;
 import com.hfad.asesoriasuabc.Database.MateriasDatabaseHelper;
 import com.hfad.asesoriasuabc.Database.UsuariosDatabaseHelper;
 
@@ -45,6 +48,8 @@ public class SolicitarFragment extends Fragment{
     private String matriculaAsesor = "";
     private String materia = "";
     private String nombre = "";
+    private String horario = "";
+    String[] horarios;
 
     private TextView mAsesor;
     private TextView mHorario;
@@ -67,6 +72,7 @@ public class SolicitarFragment extends Fragment{
     private Calendar calendario;
     SQLiteOpenHelper materiasDatabaseHelper;
     SQLiteOpenHelper asesoresDatabaseHelper;
+    SQLiteOpenHelper citasDatabaseHelper;
 
     String[] parts;
 
@@ -162,7 +168,7 @@ public class SolicitarFragment extends Fragment{
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton rb=(RadioButton) view.findViewById(checkedId);
-                String radioText = rb.getText().toString();
+                materia = rb.getText().toString();
 
                 mHorario.setVisibility(View.INVISIBLE);
                 mHorarioGroup.setVisibility(View.INVISIBLE);
@@ -177,7 +183,7 @@ public class SolicitarFragment extends Fragment{
                 materiasDatabaseHelper = new MateriasDatabaseHelper(getContext());
                 try{
                     db = materiasDatabaseHelper.getReadableDatabase();
-                    Cursor fila=db.rawQuery("select MATRICULA from MATERIAS where NOMBRE = '" + radioText + "' and ASESOR = 1",null);
+                    Cursor fila=db.rawQuery("select MATRICULA from MATERIAS where NOMBRE = '" + materia + "' and ASESOR = 1",null);
                     while(fila.moveToNext()) {
                         matriculaAsesor=fila.getString(0);
                         asesoresDatabaseHelper = new AsesoresDatabaseHelper(getContext());
@@ -260,9 +266,10 @@ public class SolicitarFragment extends Fragment{
                     asesoresDatabaseHelper = new AsesoresDatabaseHelper(getContext());
                     try{
                         db = asesoresDatabaseHelper.getReadableDatabase();
-                        Cursor fila=db.rawQuery("select " +daySelected+ " from ASESORES where NOMBRE = '" + parts[0] + "' and APELLIDO = '" + parts[1] + "'",null);
+                        Cursor fila=db.rawQuery("select " +daySelected+ ", MATRICULA from ASESORES where NOMBRE = '" + parts[0] + "' and APELLIDO = '" + parts[1] + "'",null);
                         while(fila.moveToNext()) {
-                            String[] horarios = (fila.getString(0)).split("-",2);
+                            matriculaAsesor=fila.getString(1);
+                            horarios = (fila.getString(0)).split("-",2);
                             Log.d("SolicitarFregament", "Horario = "+horarios[0]+" "+horarios[1]);
                             //mHorarioGroup.addView(mCalendar);
                             int horarioInicio = Integer.parseInt((horarios[0].split(":"))[0]);
@@ -302,11 +309,10 @@ public class SolicitarFragment extends Fragment{
                                        int position, long id) {
                 Object item = adapterView.getItemAtPosition(position);
                 if (item != null) {
-                    Toast.makeText(getContext(), item.toString(),
-                            Toast.LENGTH_SHORT).show();
+                    horario = item.toString();
                     mCita.setVisibility(View.VISIBLE);
                     ((ViewGroup)mCita.getParent()).removeView(mCita);
-                    mCita.setText("Asesoria: "+calendarDay+"/"+calendarMonth+"/"+calendarYear+" de "+item.toString());
+                    mCita.setText("Asesoria: "+calendarDay+"/"+calendarMonth+"/"+calendarYear+" de "+horario);
                     mHorarioGroup.addView(mCita);
 
                     registrarCita.setVisibility(View.VISIBLE);
@@ -324,8 +330,29 @@ public class SolicitarFragment extends Fragment{
         registrarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Enviado",
-                        Toast.LENGTH_SHORT).show();
+                horarios = horario.split("-",2);
+                citasDatabaseHelper = new CitasDatabaseHelper(getContext());
+                try{
+                    db = citasDatabaseHelper.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+                    values.put("MATRICULA_ASESOR", matriculaAsesor);
+                    values.put("MATRICULA_ASESORADO", matricula);
+                    values.put("MATERIA", materia);
+                    values.put("DAY", calendarDay);
+                    values.put("MONTH", calendarMonth);
+                    values.put("YEAR", calendarYear);
+                    values.put("HORA_INICIO", horarios[0]);
+                    values.put("HORA_FIN", horarios[1]);
+                    values.put("ESTADO", "EN ESPERA");
+
+                    db.insert("CITAS", null, values);
+                    db.close();
+                   CitaCreadaFragment notificacion = new CitaCreadaFragment();
+                   notificacion.show(getFragmentManager(), "cita");
+                } catch (SQLiteException e){
+                    Toast toast = Toast.makeText(getContext(), "Database unavaible: onResume Citas", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
     }

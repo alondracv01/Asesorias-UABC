@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="1dp"
+        android:layout_weight="25">
+
+        <TextView
+            android:id="@+id/materiaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="10dp"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:text="Materia" />
+
+        <TextView
+            android:id="@+id/asesorCitaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="8dp"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/gillsans"
+            android:text="Asesor" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="1dp"
+        android:layout_weight="40">
+
+        <TextView
+            android:id="@+id/fechaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="7dp"
+            android:fontFamily="@font/gillsans_bold"
+            android:layout_margin="5dp"
+            android:text="Fecha" />
+
+        <TextView
+            android:id="@+id/horaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="6dp"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/gillsans"
+            android:text="Hora" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:layout_weight="35">
+
+        <TextView
+            android:id="@+id/estadoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gillsans_bold"
+            android:layout_margin="3dp"
+            android:text="ESTADO"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="8dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonCE"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:background="@color/colorPrimaryLight"
+            android:textSize="8dp"
+            android:text="Cancelar / Evaluar" />
+    </LinearLayout>
+</LinearLayout>
