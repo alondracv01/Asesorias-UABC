@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/colorPrimary"
+    android:padding="30dp"
+    tools:context=".Formulario2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="#BACC90">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingBottom="20dp"
+                android:text="Registrar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nuevo Asesor"
+                android:gravity="center"
+                android:textSize="24dp"
+                android:paddingBottom="20dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:text="Nombre (s)"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            <EditText
+                android:id="@+id/nombre_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:textSize="19dp"
+                android:singleLine="true"
+                android:inputType="textCapWords"
+                android:gravity="left"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:text="Apellido (s)"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            <EditText
+                android:id="@+id/apellido_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Apellido"
+                android:textSize="19dp"
+                android:singleLine="true"
+                android:inputType="textCapWords"
+                android:gravity="left"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:text="Matrícula"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            <EditText
+                android:id="@+id/matricula_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Matricula"
+                android:textSize="19dp"
+                android:singleLine="true"
+                android:gravity="left"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:text="Correo Institucional"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+            <EditText
+                android:id="@+id/correo_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:hint="Correo@uabc.edu.mx"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textSize="19dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:text="Contraseña"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            <EditText
+                android:id="@+id/contrasena_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:textSize="19dp"
+                android:singleLine="true"
+                android:gravity="left"/>
+
+            <Button
+                android:id="@+id/registro_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="50dp"
+                android:background="#AC8007"
+                android:textColor="@color/white"
+                android:text="Refistrar"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
