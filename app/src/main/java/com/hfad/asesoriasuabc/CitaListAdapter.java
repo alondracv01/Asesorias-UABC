@@ -1,7 +1,10 @@
 package com.hfad.asesoriasuabc;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,8 +39,9 @@ public class CitaListAdapter extends ArrayAdapter<Cita>{
         String fecha = getItem(position).getFecha();
         String hora = getItem(position).getHora();
         String estado = getItem(position).getEstado();
+        int id = getItem(position).getId();
 
-        Cita cita = new Cita(asesor,materia,fecha,hora,estado);
+        Cita cita = new Cita(asesor,materia,fecha,hora,estado,id);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
@@ -68,10 +71,20 @@ public class CitaListAdapter extends ArrayAdapter<Cita>{
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle args = new Bundle();
+                args.putString("Materia", materia);
+                args.putString("Asesor", asesor);
+                args.putString("Fecha", fecha);
+                args.putString("Hora", hora);
+                args.putString("Estado", estado);
+                args.putInt("Id", id);
                 DetallesFragment detallesFragment = new DetallesFragment();
-                detallesFragment.show(((AppCompatActivity)mContext).getFragmentManager(), "DetallesPopup");
+                detallesFragment.setArguments(args);
+                detallesFragment.show(((AppCompatActivity)mContext).getFragmentManager(), "DetallesFragment");
             }
         });
+
+
 
         return convertView;
     }

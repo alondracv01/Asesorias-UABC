@@ -53,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:textSize="10dp"
+                    android:gravity="left"
                     android:layout_margin="5dp"
                     android:fontFamily="@font/gillsans"
                     android:text="Nombre de la materia" />
@@ -81,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:textSize="10dp"
+                    android:gravity="left"
                     android:layout_margin="5dp"
                     android:fontFamily="@font/gillsans"
                     android:text="Nombre del asesor" />
@@ -110,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:textSize="10dp"
+                    android:gravity="left"
                     android:layout_margin="5dp"
                     android:fontFamily="@font/gillsans"
                     android:text="Fecha de la cita" />
@@ -138,6 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:textSize="10dp"
+                    android:gravity="left"
                     android:layout_margin="5dp"
                     android:fontFamily="@font/gillsans"
                     android:text="Hora de la cita" />
@@ -166,6 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:textSize="10dp"
+                    android:gravity="left"
                     android:layout_margin="5dp"
                     android:fontFamily="@font/gillsans"
                     android:textColor="@color/colorPrimary"
@@ -195,32 +200,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/cancelarCita"
+
+            <Button
+                android:id="@+id/cancelar"
+                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@color/colorPrimaryLight"
-                android:clickable="true">
-
-                <ImageView
-                    android:layout_height="20dp"
-                    android:layout_width="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp"
-                    app:srcCompat="@drawable/cancelar" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/gillsans_bold"
-                    android:textSize="15dp"
-                    android:gravity="center"
-                    android:layout_margin="5dp"
-                    android:text="Cancelar cita"/>
-            </LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:background="@color/colorSecondaryLight"
+                android:text="Cancelar asesoria"/>
 
             <Button
                 android:id="@+id/evaluar"

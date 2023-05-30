@@ -6,13 +6,23 @@ public class Cita {
     private String fecha;
     private String hora;
     private String estado;
+    private int id;
 
-    public Cita(String asesor, String materia, String fecha, String hora, String estado) {
+    public Cita(String asesor, String materia, String fecha, String hora, String estado, int id) {
         this.asesor = asesor;
         this.materia = materia;
         this.fecha = fecha;
         this.hora = hora;
         this.estado = estado;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAsesor() {
