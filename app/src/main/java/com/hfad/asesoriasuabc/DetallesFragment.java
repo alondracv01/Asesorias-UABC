@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hfad.asesoriasuabc.Database.CitasDatabaseHelper;
+
+import org.w3c.dom.Text;
 
 public class DetallesFragment extends DialogFragment {
 
@@ -74,6 +78,9 @@ public class DetallesFragment extends DialogFragment {
         Button cerrar = (Button) getDialog().findViewById(R.id.cerrar);
         Button evaluar = (Button) getDialog().findViewById(R.id.evaluar);
         Button cancelar = (Button) getDialog().findViewById(R.id.cancelar);
+        SeekBar evaluarAsesor = (SeekBar)getDialog().findViewById(R.id.evalAsesor);
+        TextView evaluarAsesorTitulo = (TextView) getDialog().findViewById(R.id.evalTitulo);
+        EditText comentariosAsesor = (EditText) getDialog().findViewById(R.id.comentariosAsesor);
 
         tvAsesor.setText(asesor);
         tvMateria.setText(materia);
@@ -84,13 +91,22 @@ public class DetallesFragment extends DialogFragment {
         if (estado.equals("EN ESPERA") || estado.equals("CONFIRMADA")){
             evaluar.setVisibility(View.INVISIBLE);
             cancelar.setVisibility(View.VISIBLE);
+            evaluarAsesor.setVisibility(View.INVISIBLE);
+            evaluarAsesorTitulo.setVisibility(View.INVISIBLE);
+            comentariosAsesor.setVisibility(View.INVISIBLE);
         }else {
             if (estado.equals("FINALIZADA") || estado.equals("ASESOR N/A")){
                 evaluar.setVisibility(View.VISIBLE);
                 cancelar.setVisibility(View.INVISIBLE);
+                evaluarAsesor.setVisibility(View.VISIBLE);
+                evaluarAsesorTitulo.setVisibility(View.VISIBLE);
+                comentariosAsesor.setVisibility(View.VISIBLE);
             }else {
                 evaluar.setVisibility(View.INVISIBLE);
                 cancelar.setVisibility(View.INVISIBLE);
+                evaluarAsesor.setVisibility(View.INVISIBLE);
+                evaluarAsesorTitulo.setVisibility(View.INVISIBLE);
+                comentariosAsesor.setVisibility(View.INVISIBLE);
             }
         }
 
@@ -102,6 +118,18 @@ public class DetallesFragment extends DialogFragment {
         });
 
         cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                args.putInt("ID", id);
+                CancelarCitaFragment notificacion = new CancelarCitaFragment();
+                notificacion.setArguments(args);
+                notificacion.show(getFragmentManager(), "cita");
+                getDialog().dismiss();
+            }
+        });
+
+        evaluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle args = new Bundle();

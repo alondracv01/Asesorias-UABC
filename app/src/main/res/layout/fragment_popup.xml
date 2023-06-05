@@ -176,6 +176,40 @@
                     android:textColor="@color/colorPrimary"
                     android:text="Estado de la cita" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/evalTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/gillsans_bold"
+                android:textColor="@color/colorPrimaryLight"
+                android:text="Evaluacion del Asesor" />
+
+            <SeekBar
+                android:id="@+id/evalAsesor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:layout_margin="20dp"
+                android:thumbTint="@color/colorPrimaryDark"
+                android:thumb="@drawable/img_1"
+                android:progressTint="@color/colorPrimaryDark"
+                android:progressBackgroundTint="@color/colorPrimaryDark"
+                android:progress="100" />
+
+            <EditText
+                android:id="@+id/comentariosAsesor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Comentarios acerca del Asesor"
+                android:textColorHint="@color/gray"  />
+
         </LinearLayout>
     </ScrollView>
 

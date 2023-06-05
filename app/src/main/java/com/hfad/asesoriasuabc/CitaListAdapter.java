@@ -83,9 +83,6 @@ public class CitaListAdapter extends ArrayAdapter<Cita>{
                 detallesFragment.show(((AppCompatActivity)mContext).getFragmentManager(), "DetallesFragment");
             }
         });
-
-
-
         return convertView;
     }
 }

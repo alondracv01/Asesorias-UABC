@@ -71,6 +71,7 @@ public class CitasDatabaseHelper extends SQLiteOpenHelper {
                     + "HORA_INICIO TEXT,"
                     + "HORA_FIN TEXT,"
                     + "ESTADO TEXT);");
+            insertDatos(db, "1270673", "1270851", "Metodologia de la programacion", 25, 07, 2023,"13:00", "17:00", "FINALIZADA");
         }
     }
 }

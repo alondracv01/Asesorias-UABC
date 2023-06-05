@@ -10,4 +10,5 @@
     <color name="accent">#20419A</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="gray">#A0A0A0</color>
 </resources>
