@@ -206,7 +206,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:ems="10"
-                android:inputType="number"
+                android:inputType="text"
                 android:hint="Comentarios acerca del Asesor"
                 android:textColorHint="@color/gray"  />
 

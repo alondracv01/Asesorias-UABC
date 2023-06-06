@@ -134,7 +134,7 @@ public class DetallesFragment extends DialogFragment {
             public void onClick(View view) {
                 Bundle args = new Bundle();
                 args.putInt("ID", id);
-                CancelarCitaFragment notificacion = new CancelarCitaFragment();
+                EvaluarAsesorFragment notificacion = new EvaluarAsesorFragment();
                 notificacion.setArguments(args);
                 notificacion.show(getFragmentManager(), "cita");
                 getDialog().dismiss();

@@ -9,4 +9,6 @@
     <string name="nav_close_drawer">Close navigation drawer</string>
     <string name="notificacion"><center><b>¡La cita se creo con exito!</b>\n\nEspera por la respuesta del asesor.</center></string>
     <string name="cancelada"><center>¿Esta segur@ de cancelar la cita?</center></string>
+    <string name="evaluacionRealizada"><center>La evaluación se ha registrado.</center></string>
+
 </resources>
