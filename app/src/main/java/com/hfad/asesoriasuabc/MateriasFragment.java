@@ -39,18 +39,19 @@ import java.util.List;
 
 public class MateriasFragment extends Fragment{
     private SQLiteDatabase db;
-
+    private Cursor fila;
     public MainActivity main;
 
     private String matricula = "";
     private String nombre = "";
     private String apellido = "";
     private String materia = "";
+    private int asesor = 0;
     private List<String> mLista = new ArrayList<>();
     private ArrayAdapter<String> mAdapter;
 
     private TextView pNombre;
-    private TextView pHorariosDisponibles;
+    private TextView tMaterias;
     private ListView pMaterias;
     //private ImageView fotoPerfil;
     //private ImageButton editar1;
@@ -70,38 +71,41 @@ public class MateriasFragment extends Fragment{
 
         main = (MainActivity) getActivity();
         matricula = main.matricula;
+        asesor = main.asesor;
         Log.d("MateriasFragment", "Matricula: " + matricula);
 
         SQLiteOpenHelper usuariosDatabaseHelper = new UsuariosDatabaseHelper(getContext());
-        try{
+        try {
             db = usuariosDatabaseHelper.getReadableDatabase();
-            Cursor fila=db.rawQuery("select NOMBRE,APELLIDO from USUARIOS where MATRICULA = '" + matricula +"'",null);
-            if(fila.moveToFirst()){
-                nombre=fila.getString(0);
-                apellido=fila.getString(1);
-            }
-            else {
+            Cursor fila = db.rawQuery("select NOMBRE,APELLIDO from USUARIOS where MATRICULA = '" + matricula + "'", null);
+            if (fila.moveToFirst()) {
+                nombre = fila.getString(0);
+                apellido = fila.getString(1);
+            } else {
                 Log.d("MateriasFragment", "Incorrecto");
                 Toast.makeText(getContext(), "Usuario no encontrado", Toast.LENGTH_SHORT).show();
             }
             fila.close();
             db.close();
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Toast toast = Toast.makeText(getContext(), "Database unavaible: onCreate", Toast.LENGTH_SHORT);
             toast.show();
         }
 
         SQLiteOpenHelper materiasDatabaseHelper = new MateriasDatabaseHelper(getContext());
-        try{
+        try {
             db = materiasDatabaseHelper.getReadableDatabase();
-            Cursor fila=db.rawQuery("select NOMBRE from MATERIAS where MATRICULA = '" + matricula + "' and CURSANDO = 1",null);
-            while(fila.moveToNext()) {
-                materia=fila.getString(0);
+            if(asesor == 0)
+                fila = db.rawQuery("select NOMBRE from MATERIAS where MATRICULA = '" + matricula + "' and CURSANDO = 1", null);
+            else
+                fila=db.rawQuery("select NOMBRE from MATERIAS where MATRICULA = '" + matricula + "' and ASESOR = 1",null);
+            while (fila.moveToNext()) {
+                materia = fila.getString(0);
                 mLista.add(materia);
             }
             fila.close();
             db.close();
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Toast toast = Toast.makeText(getContext(), "Database unavaible: onCreate", Toast.LENGTH_SHORT);
             toast.show();
         }
@@ -117,6 +121,7 @@ public class MateriasFragment extends Fragment{
 
         pNombre = (TextView) view.findViewById(R.id.nombre);
         pMaterias = (ListView) view.findViewById(R.id.materiasListView);
+        tMaterias = (TextView) view.findViewById(R.id.materiasText);
 
         /*fotoPerfil = (ImageView) view.findViewById(R.id.fotoPerfil);
         editar1 = (ImageButton) view.findViewById(R.id.editar_button1);*/
@@ -124,6 +129,10 @@ public class MateriasFragment extends Fragment{
         pNombre.setText(nombre + " " + apellido);
         mAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, mLista);
         pMaterias.setAdapter(mAdapter);
+
+        if (asesor != 0 ){
+            tMaterias.setText("Materias que asesoro");
+        }
 
         /*SQLiteOpenHelper fotosDatabaseHelper = new FotosDatabaseHelper(getContext());
         try{

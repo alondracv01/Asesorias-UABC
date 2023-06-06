@@ -1,9 +1,18 @@
 package com.hfad.asesoriasuabc;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +22,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.navigation.NavigationView;
+import com.hfad.asesoriasuabc.Database.AsesoresDatabaseHelper;
+import com.hfad.asesoriasuabc.Database.MateriasDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private int actualFrag = R.id.nav_materias;
 
     public String matricula;
+    private SQLiteDatabase db;
+    public int asesor = 0;
+    NavigationView navigationView;
+    MenuItem visasesor, visasesorado, solicitar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +75,30 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Menu menu = navigationView.getMenu();
+        visasesor = menu.findItem(R.id.nav_visasesor);
+        visasesor.setVisible(false);
+        visasesorado = menu.findItem(R.id.nav_visasesorado);
+        visasesorado.setVisible(false);
+        solicitar = menu.findItem(R.id.nav_solicitar);
+        solicitar.setVisible(true);
+
+        SQLiteOpenHelper asesoresDatabaseHelper = new AsesoresDatabaseHelper(this);
+        try{
+            db = asesoresDatabaseHelper.getReadableDatabase();
+            Cursor fila=db.rawQuery("select MATRICULA from ASESORES where MATRICULA = '" + matricula + "'",null);
+            while(fila.moveToNext()) {
+                visasesor.setVisible(true);
+            }
+            fila.close();
+            db.close();
+        } catch (SQLiteException e){
+            Toast toast = Toast.makeText(this, "Database unavaible: onCreate", Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
         if (savedInstanceState != null){
             fragment = new MateriasFragment();
@@ -76,6 +114,26 @@ public class MainActivity extends AppCompatActivity
                 case R.id.nav_solicitar:
                     fragment = new SolicitarFragment();
                     actualFrag = R.id.nav_solicitar;
+                    break;
+                case R.id.nav_visasesor:
+                    asesor = 1;
+                    visasesor.setVisible(false);
+                    visasesorado.setVisible(true);
+                    solicitar.setVisible(false);
+                    fragment = new MateriasFragment();
+                    actualFrag = R.id.nav_materias;
+                    break;
+                case R.id.nav_visasesorado:
+                    asesor = 0;
+                    visasesor.setVisible(true);
+                    visasesorado.setVisible(false);
+                    solicitar.setVisible(true);
+                    fragment = new MateriasFragment();
+                    actualFrag = R.id.nav_materias;
+                    break;
+                case R.id.nav_cerrarsesion:
+                    //No me salio esto jaja
+                    startActivity(new Intent(MainActivity.this, LogInActivity.class));
                     break;
                 default:
                     fragment = new MateriasFragment();
@@ -97,6 +155,29 @@ public class MainActivity extends AppCompatActivity
     public void onResume(){
         super.onResume();
         Fragment fragment = null;
+
+        Menu menu = navigationView.getMenu();
+        visasesor = menu.findItem(R.id.nav_visasesor);
+        visasesor.setVisible(false);
+        visasesorado = menu.findItem(R.id.nav_visasesorado);
+        visasesorado.setVisible(false);
+        solicitar = menu.findItem(R.id.nav_solicitar);
+        solicitar.setVisible(true);
+
+        SQLiteOpenHelper asesoresDatabaseHelper = new AsesoresDatabaseHelper(this);
+        try{
+            db = asesoresDatabaseHelper.getReadableDatabase();
+            Cursor fila=db.rawQuery("select MATRICULA from ASESORES where MATRICULA = '" + matricula + "'",null);
+            while(fila.moveToNext()) {
+                visasesor.setVisible(true);
+            }
+            fila.close();
+            db.close();
+        } catch (SQLiteException e){
+            Toast toast = Toast.makeText(this, "Database unavaible: onCreate", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
         switch (actualFrag){
             case R.id.nav_citas:
                 fragment = new CitasFragment();
@@ -109,6 +190,26 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_solicitar:
                 fragment = new SolicitarFragment();
                 actualFrag = R.id.nav_asesores;
+                break;
+            case R.id.nav_visasesor:
+                asesor = 1;
+                visasesor.setVisible(false);
+                visasesorado.setVisible(true);
+                solicitar.setVisible(false);
+                fragment = new MateriasFragment();
+                actualFrag = R.id.nav_materias;
+                break;
+            case R.id.nav_visasesorado:
+                asesor = 0;
+                visasesor.setVisible(true);
+                visasesorado.setVisible(false);
+                solicitar.setVisible(true);
+                fragment = new MateriasFragment();
+                actualFrag = R.id.nav_materias;
+                break;
+            case R.id.nav_cerrarsesion:
+                //No me salio esto jaja
+                startActivity(new Intent(MainActivity.this, LogInActivity.class));
                 break;
             default:
                 fragment = new MateriasFragment();
@@ -140,6 +241,26 @@ public class MainActivity extends AppCompatActivity
                 fragment = new SolicitarFragment();
                 actualFrag = R.id.nav_asesores;
                 break;
+            case R.id.nav_visasesor:
+                asesor = 1;
+                visasesor.setVisible(false);
+                visasesorado.setVisible(true);
+                solicitar.setVisible(false);
+                fragment = new MateriasFragment();
+                actualFrag = R.id.nav_materias;
+                break;
+            case R.id.nav_visasesorado:
+                asesor = 0;
+                visasesor.setVisible(true);
+                visasesorado.setVisible(false);
+                solicitar.setVisible(true);
+                fragment = new MateriasFragment();
+                actualFrag = R.id.nav_materias;
+                break;
+            case R.id.nav_cerrarsesion:
+                //No me salio esto jaja
+                startActivity(new Intent(MainActivity.this, LogInActivity.class));
+                break;
             default:
                 fragment = new MateriasFragment();
                 actualFrag = R.id.nav_materias;
@@ -170,9 +291,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
+    public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt("fragmento", actualFrag);
         savedInstanceState.putString("matricula", matricula);
+        savedInstanceState.putInt("asesor", asesor);
     }
 }

@@ -5,10 +5,15 @@
     <string name="nav_citas">Mis citas</string>
     <string name="nav_solicitar">Solicitar asesoría</string>
     <string name="nav_asesores">Asesores</string>
+    <string name="nav_visasesor">Vista de asesor</string>
+    <string name="nav_visasesorado">Vista de asesorado</string>
+    <string name="nav_cerrar">Cerrar sesion</string>
     <string name="nav_open_drawer">Open navigation drawer</string>
     <string name="nav_close_drawer">Close navigation drawer</string>
     <string name="notificacion"><center><b>¡La cita se creo con exito!</b>\n\nEspera por la respuesta del asesor.</center></string>
     <string name="cancelada"><center>¿Esta segur@ de cancelar la cita?</center></string>
+    <string name="rechazada"><center>¿Esta segur@ de rechazar la cita?</center></string>
+    <string name="aceptada"><center>¿Esta segur@ de aceptar la cita?</center></string>
     <string name="evaluacionRealizada"><center>La evaluación se ha registrado.</center></string>
 
 </resources>

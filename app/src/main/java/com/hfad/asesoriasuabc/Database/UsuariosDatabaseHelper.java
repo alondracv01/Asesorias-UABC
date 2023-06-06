@@ -48,6 +48,7 @@ public class UsuariosDatabaseHelper extends SQLiteOpenHelper {
                     + "MATRICULA TEXT,"
                     + "CONTRASENA TEXT);");
             insertDatos(db, "Alondra", "Carrasco", "alondra.carrasco@uabc.edu.mx", "1270851", "1234567890");
+            insertDatos(db, "Tamara", "Rico", "tamara.rico@uabc.edu.mx", "1270673", "1234567890");
         }
     }
 }

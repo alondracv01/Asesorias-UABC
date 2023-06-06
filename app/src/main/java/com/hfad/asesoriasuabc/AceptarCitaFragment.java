@@ -14,29 +14,23 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.hfad.asesoriasuabc.Database.CitasDatabaseHelper;
 
-public class CancelarCitaFragment extends DialogFragment {
+public class AceptarCitaFragment extends DialogFragment {
     private SQLiteDatabase db;
     SQLiteOpenHelper citasDatabaseHelper;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle mArgs = getArguments();
         int mid = mArgs.getInt("ID");
-        String cr = mArgs.getString("cr");
-        int cadena;
-        if (cr.equals("cancelar"))
-            cadena = R.string.cancelada;
-        else
-            cadena = R.string.rechazada;
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(cadena)
-                .setPositiveButton("Si, cancelar",  new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.aceptada)
+                .setPositiveButton("Si, aceptar",  new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         citasDatabaseHelper = new CitasDatabaseHelper(getContext());
                         try{
                             db = citasDatabaseHelper.getWritableDatabase();
                             ContentValues values = new ContentValues();
-                            values.put("ESTADO", "CANCELADA");
+                            values.put("ESTADO", "CONFIRMADA");
 
                             String[] args = new String[]{Integer.toString(mid)};
                             db.update("CITAS", values, "_id=?", args);

@@ -21,17 +21,21 @@ import androidx.fragment.app.FragmentTransaction;
 import com.hfad.asesoriasuabc.Database.AsesoresDatabaseHelper;
 import com.hfad.asesoriasuabc.Database.CitasDatabaseHelper;
 import com.hfad.asesoriasuabc.Database.MateriasDatabaseHelper;
+import com.hfad.asesoriasuabc.Database.UsuariosDatabaseHelper;
 
 import java.util.ArrayList;
 
 public class CitasFragment extends Fragment{
     private SQLiteDatabase db;
     private SQLiteDatabase db2;
+    private Cursor fila;
+    private Cursor cursor;
     public MainActivity main;
 
     private String matricula = "";
-    private String matriculaAsesor = "";
-    private String nombreAsesor = "";
+    private String matricula2 = "";
+    private String nombre = "";
+    private int asesor = 0;
     private Cita cita;
     private ArrayList<Cita> mLista = new ArrayList<>();
     private ListView pCitas;
@@ -50,6 +54,7 @@ public class CitasFragment extends Fragment{
 
         main = (MainActivity) getActivity();
         matricula = main.matricula;
+        asesor = main.asesor;
     }
 
     @Override
@@ -69,18 +74,27 @@ public class CitasFragment extends Fragment{
         SQLiteOpenHelper citasDatabaseHelper = new CitasDatabaseHelper(getContext());
         try{
             db = citasDatabaseHelper.getReadableDatabase();
-            Cursor fila=db.rawQuery("select MATRICULA_ASESOR, MATERIA, DAY, MONTH, YEAR, HORA_INICIO, HORA_FIN, ESTADO, _id from CITAS where MATRICULA_ASESORADO = '" + matricula + "'",null);
+            if(asesor == 0)
+                fila=db.rawQuery("select MATRICULA_ASESOR, MATERIA, DAY, MONTH, YEAR, HORA_INICIO, HORA_FIN, ESTADO, _id from CITAS where MATRICULA_ASESORADO = '" + matricula + "'",null);
+            else
+                fila=db.rawQuery("select MATRICULA_ASESORADO, MATERIA, DAY, MONTH, YEAR, HORA_INICIO, HORA_FIN, ESTADO, _id from CITAS where MATRICULA_ASESOR = '" + matricula + "'",null);
             while(fila.moveToNext()) {
                 noCitas.setVisibility(View.INVISIBLE);
-                matriculaAsesor = fila.getString(0);
+                matricula2 = fila.getString(0);
 
-                SQLiteOpenHelper asesoresDatabaseHelper = new AsesoresDatabaseHelper(getContext());
                 try{
-                    db2 = asesoresDatabaseHelper.getReadableDatabase();
-                    Cursor cursor=db2.rawQuery("select NOMBRE, APELLIDO from ASESORES where MATRICULA = '" + matriculaAsesor + "'",null);
+                    if (asesor == 0) {
+                        SQLiteOpenHelper asesoresDatabaseHelper = new AsesoresDatabaseHelper(getContext());
+                        db2 = asesoresDatabaseHelper.getReadableDatabase();
+                        cursor = db2.rawQuery("select NOMBRE, APELLIDO from ASESORES where MATRICULA = '" + matricula2 + "'", null);
+                    }else{
+                        SQLiteOpenHelper usuariosDatabaseHelper = new UsuariosDatabaseHelper(getContext());
+                        db2 = usuariosDatabaseHelper.getReadableDatabase();
+                        cursor = db2.rawQuery("select NOMBRE, APELLIDO from USUARIOS where MATRICULA = '" + matricula2 + "'", null);
+                    }
                     int i = 0;
                     while(cursor.moveToNext()) {
-                        nombreAsesor = cursor.getString(0) + " " + cursor.getString(1);
+                        nombre = cursor.getString(0) + " " + cursor.getString(1);
                     }
                     cursor.close();
                     db2.close();
@@ -88,7 +102,7 @@ public class CitasFragment extends Fragment{
                     Toast toast = Toast.makeText(getContext(), "Database unavaible: onCreate", Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                cita = new Cita(nombreAsesor, fila.getString(1), fila.getString(2) + "/" + fila.getString(3) + "/" + fila.getString(4), fila.getString(5) + "-" + fila.getString(6), fila.getString(7), fila.getInt(8));
+                cita = new Cita(nombre, fila.getString(1), fila.getString(2) + "/" + fila.getString(3) + "/" + fila.getString(4), fila.getString(5) + "-" + fila.getString(6), fila.getString(7), fila.getInt(8));
                 mLista.add(cita);
             }
             fila.close();

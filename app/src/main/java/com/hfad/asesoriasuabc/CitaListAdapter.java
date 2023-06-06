@@ -24,11 +24,16 @@ public class CitaListAdapter extends ArrayAdapter<Cita>{
     private static final String TAG = "CitaListAdapter";
     private Context mContext;
     int mResource;
+    public MainActivity main;
+    private int estAsesor = 0;
 
     public CitaListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Cita> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+
+        main = (MainActivity) mContext;
+        estAsesor = main.asesor;
     }
 
     @NonNull
@@ -58,11 +63,15 @@ public class CitaListAdapter extends ArrayAdapter<Cita>{
         tvFecha.setText(fecha);
         tvHora.setText(hora);
         tvEstado.setText(estado);
-        if (estado.equals("EN ESPERA") || estado.equals("CONFIRMADA")){
+        if (estado.equals("CONFIRMADA")){
             boton.setText("Cancelar");
         }else {
-            if (estado.equals("FINALIZADA") || estado.equals("ASESOR N/A")){
-                boton.setText("Evaluar asesoria");
+            if (estado.equals("EN ESPERA") && estAsesor == 0){
+                boton.setText("Cancelar");
+            } else if (estado.equals("EN ESPERA") && estAsesor == 1) {
+                boton.setText("Responder");
+            } else if (estado.equals("FINALIZADA") || (estado.equals("ASESOR N/A") && estAsesor == 0) || (estado.equals("ASESORADO N/A") && estAsesor == 1)){
+                boton.setText("Evaluar");
             }else {
                 boton.setVisibility(View.INVISIBLE);
             }

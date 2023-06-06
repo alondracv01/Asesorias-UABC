@@ -34,13 +34,14 @@ import com.hfad.asesoriasuabc.Database.CitasDatabaseHelper;
 import org.w3c.dom.Text;
 
 public class DetallesFragment extends DialogFragment {
-
+    public MainActivity main;
     String materia;
     String asesor;
     String fecha;
     String hora;
     String estado;
     int id;
+    private int estAsesor = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class DetallesFragment extends DialogFragment {
         hora = mArgs.getString("Hora");
         estado = mArgs.getString("Estado");
         id = mArgs.getInt("Id");
+        main = (MainActivity) getActivity();
+        estAsesor = main.asesor;
         return view;
     }
 
@@ -70,6 +73,7 @@ public class DetallesFragment extends DialogFragment {
     public void onResume() {
         super.onResume();
 
+        TextView asesorAsesorado = (TextView) getDialog().findViewById(R.id.asesorAsesorado);
         TextView tvAsesor = (TextView) getDialog().findViewById(R.id.asesorPopup);
         TextView tvMateria = (TextView) getDialog().findViewById(R.id.materiaPopup);
         TextView tvFecha = (TextView) getDialog().findViewById(R.id.fechaPopup);
@@ -78,6 +82,7 @@ public class DetallesFragment extends DialogFragment {
         Button cerrar = (Button) getDialog().findViewById(R.id.cerrar);
         Button evaluar = (Button) getDialog().findViewById(R.id.evaluar);
         Button cancelar = (Button) getDialog().findViewById(R.id.cancelar);
+        Button aceptar = (Button) getDialog().findViewById(R.id.aceptar);
         SeekBar evaluarAsesor = (SeekBar)getDialog().findViewById(R.id.evalAsesor);
         TextView evaluarAsesorTitulo = (TextView) getDialog().findViewById(R.id.evalTitulo);
         EditText comentariosAsesor = (EditText) getDialog().findViewById(R.id.comentariosAsesor);
@@ -88,25 +93,48 @@ public class DetallesFragment extends DialogFragment {
         tvHora.setText(hora);
         tvEstado.setText(estado);
 
-        if (estado.equals("EN ESPERA") || estado.equals("CONFIRMADA")){
+        if (estAsesor == 0)
+            asesorAsesorado.setText("Asesor");
+        else
+            asesorAsesorado.setText("Asesorado");
+
+        if (estado.equals("CONFIRMADA")){
             evaluar.setVisibility(View.INVISIBLE);
+            aceptar.setVisibility(View.INVISIBLE);
             cancelar.setVisibility(View.VISIBLE);
             evaluarAsesor.setVisibility(View.INVISIBLE);
             evaluarAsesorTitulo.setVisibility(View.INVISIBLE);
             comentariosAsesor.setVisibility(View.INVISIBLE);
         }else {
-            if (estado.equals("FINALIZADA") || estado.equals("ASESOR N/A")){
-                evaluar.setVisibility(View.VISIBLE);
-                cancelar.setVisibility(View.INVISIBLE);
-                evaluarAsesor.setVisibility(View.VISIBLE);
-                evaluarAsesorTitulo.setVisibility(View.VISIBLE);
-                comentariosAsesor.setVisibility(View.VISIBLE);
-            }else {
+            if (estado.equals("EN ESPERA")) {
                 evaluar.setVisibility(View.INVISIBLE);
-                cancelar.setVisibility(View.INVISIBLE);
                 evaluarAsesor.setVisibility(View.INVISIBLE);
                 evaluarAsesorTitulo.setVisibility(View.INVISIBLE);
                 comentariosAsesor.setVisibility(View.INVISIBLE);
+                if (estAsesor == 0) {
+                    aceptar.setVisibility(View.INVISIBLE);
+                    cancelar.setVisibility(View.VISIBLE);
+                } else {
+                    aceptar.setVisibility(View.VISIBLE);
+                    cancelar.setVisibility(View.VISIBLE);
+                }
+            }else{
+                if (estado.equals("FINALIZADA") || (estado.equals("ASESOR N/A") && estAsesor == 0) || (estado.equals("ASESORADO N/A") && estAsesor == 1)) {
+                    evaluar.setVisibility(View.VISIBLE);
+                    cancelar.setVisibility(View.INVISIBLE);
+                    aceptar.setVisibility(View.INVISIBLE);
+                    evaluarAsesor.setVisibility(View.VISIBLE);
+                    evaluarAsesorTitulo.setVisibility(View.VISIBLE);
+                    comentariosAsesor.setVisibility(View.VISIBLE);
+                } else {
+                    aceptar.setVisibility(View.INVISIBLE);
+                    cancelar.setVisibility(View.INVISIBLE);
+                    evaluar.setVisibility(View.INVISIBLE);
+                    cancelar.setVisibility(View.INVISIBLE);
+                    evaluarAsesor.setVisibility(View.INVISIBLE);
+                    evaluarAsesorTitulo.setVisibility(View.INVISIBLE);
+                    comentariosAsesor.setVisibility(View.INVISIBLE);
+                }
             }
         }
 
@@ -122,7 +150,24 @@ public class DetallesFragment extends DialogFragment {
             public void onClick(View view) {
                 Bundle args = new Bundle();
                 args.putInt("ID", id);
+                if (estado.equals("EN ESPERA") && estAsesor == 0){
+                    args.putString("cr", "cancelar");
+                } else if (estado.equals("EN ESPERA") && estAsesor == 1){
+                    args.putString("cr", "rechazar");
+                }
                 CancelarCitaFragment notificacion = new CancelarCitaFragment();
+                notificacion.setArguments(args);
+                notificacion.show(getFragmentManager(), "cita");
+                getDialog().dismiss();
+            }
+        });
+
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                args.putInt("ID", id);
+                AceptarCitaFragment notificacion = new AceptarCitaFragment();
                 notificacion.setArguments(args);
                 notificacion.show(getFragmentManager(), "cita");
                 getDialog().dismiss();
